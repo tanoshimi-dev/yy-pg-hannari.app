@@ -29,7 +29,7 @@ import AppHeader from './AppHeader.vue';
 
 @media (max-width: 640px) {
   .app-main {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 }
 </style>

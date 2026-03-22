@@ -120,7 +120,10 @@ function renderBody(body: string): string {
 
   const marked = new Marked({ renderer });
 
-  return marked.parse(preprocessed) as string;
+  const html = marked.parse(preprocessed) as string;
+
+  // Wrap tables in scrollable container for mobile
+  return html.replace(/<table>/g, '<div class="table-scroll"><table>').replace(/<\/table>/g, '</table></div>');
 }
 </script>
 
@@ -218,6 +221,7 @@ function renderBody(body: string): string {
 .content-detail {
   max-width: 1100px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .back-btn {
@@ -274,15 +278,16 @@ function renderBody(body: string): string {
   border: 1px solid #e2e8f0;
   margin-bottom: 2rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  min-width: 0;
 }
 
 .body-content {
   color: #475569;
   line-height: 1.8;
   font-size: 1rem;
-  overflow-x: hidden;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  min-width: 0;
 }
 
 .body-content :deep(h1) {
@@ -314,6 +319,8 @@ function renderBody(body: string): string {
   border-radius: 4px;
   font-size: 0.875em;
   color: #7c3aed;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .body-content :deep(pre) {
@@ -325,6 +332,8 @@ function renderBody(body: string): string {
   overflow-x: auto;
   font-size: 0.85rem;
   line-height: 1.6;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .body-content :deep(pre code) {
@@ -333,17 +342,25 @@ function renderBody(body: string): string {
   color: inherit;
   font-size: inherit;
   white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .body-content :deep(p) {
   margin: 0 0 1rem;
 }
 
+.body-content :deep(.table-scroll) {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
+}
+
 .body-content :deep(table) {
   width: 100%;
   border-collapse: collapse;
-  margin: 1rem 0;
   font-size: 0.9rem;
+  min-width: 400px;
 }
 
 .body-content :deep(th),
@@ -392,16 +409,25 @@ function renderBody(body: string): string {
   text-decoration: underline;
 }
 
+.body-content :deep(figure) {
+  margin: 0;
+  overflow: hidden;
+}
+
 .body-content :deep(.image-wrapper) {
   margin: 1.5rem 0;
   text-align: center;
   overflow: hidden;
 }
 
-.body-content :deep(.image-wrapper img) {
+.body-content :deep(img) {
   max-width: 100%;
-  width: 100%;
   height: auto;
+  display: block;
+}
+
+.body-content :deep(.image-wrapper img) {
+  width: 100%;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -589,6 +615,7 @@ function renderBody(body: string): string {
 @media (max-width: 868px) {
   .content-layout {
     flex-direction: column;
+    align-items: stretch;
     gap: 0;
   }
 
@@ -615,33 +642,80 @@ function renderBody(body: string): string {
 }
 
 @media (max-width: 640px) {
-  .quiz-cta-inner {
-    flex-direction: column;
-    text-align: center;
+  .content-header h1 {
+    font-size: 1.25rem;
   }
 
-  .content-header h1 {
-    font-size: 1.5rem;
+  .content-description {
+    font-size: 0.85rem;
   }
 
   .content-body {
-    padding: 1.25rem;
-    overflow-x: hidden;
+    padding: 0.75rem;
+    border-radius: 10px;
   }
 
-  .body-content :deep(.image-wrapper),
-  .body-content :deep(.video-wrapper) {
-    margin-left: 0;
-    margin-right: 0;
+  .body-content {
+    font-size: 0.85rem;
+    line-height: 1.7;
   }
 
-  .body-content :deep(figure) {
-    margin-left: 0;
-    margin-right: 0;
+  .body-content :deep(h1) {
+    font-size: 1.15rem;
+  }
+
+  .body-content :deep(h2) {
+    font-size: 1.05rem;
+  }
+
+  .body-content :deep(h3) {
+    font-size: 0.95rem;
+  }
+
+  .body-content :deep(p),
+  .body-content :deep(li) {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .body-content :deep(code) {
+    font-size: 0.8em;
   }
 
   .body-content :deep(pre) {
-    max-width: 100%;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .body-content :deep(ul),
+  .body-content :deep(ol) {
+    padding-left: 1.25rem;
+  }
+
+  .body-content :deep(th),
+  .body-content :deep(td) {
+    padding: 0.3rem 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .body-content :deep(blockquote) {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .quiz-cta-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+  }
+
+  .quiz-cta-text h3 {
+    font-size: 1rem;
+  }
+
+  .btn-large {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
   }
 }
 </style>
