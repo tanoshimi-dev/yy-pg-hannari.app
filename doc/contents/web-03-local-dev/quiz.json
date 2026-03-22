@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "ローカル開発環境の説明として正しいものはどれですか？",
+      "explanation": "ローカル開発環境は、自分のパソコンの中にWebサーバーを作って開発・テストする環境です。インターネットに公開せずに安全に開発できます。",
+      "choices": [
+        { "text": "インターネット上のサーバーを借りること", "isCorrect": false },
+        { "text": "自分のPCの中にWebサーバーを作って開発する環境", "isCorrect": true },
+        { "text": "スマートフォンでWebサイトを見ること", "isCorrect": false },
+        { "text": "クラウドサービスにコードを保存すること", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "MAMP / XAMPP に含まれていないものはどれですか？",
+      "explanation": "MAMP/XAMPPにはApache（Webサーバー）、PHP、MySQL（データベース）が含まれています。Photoshopは画像編集ソフトで、Web開発ツールではありません。",
+      "choices": [
+        { "text": "Apache（Webサーバー）", "isCorrect": false },
+        { "text": "PHP", "isCorrect": false },
+        { "text": "MySQL（データベース）", "isCorrect": false },
+        { "text": "Photoshop（画像編集）", "isCorrect": true }
+      ]
+    },
+    {
+      "question": "XAMPPでWebページのファイルを置くフォルダはどこですか？",
+      "explanation": "XAMPPではC:\\xampp\\htdocs/フォルダにファイルを置くと、http://localhost/ でアクセスできます。",
+      "choices": [
+        { "text": "C:\\Program Files\\", "isCorrect": false },
+        { "text": "C:\\xampp\\htdocs\\", "isCorrect": true },
+        { "text": "C:\\Users\\Desktop\\", "isCorrect": false },
+        { "text": "C:\\Windows\\System32\\", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "phpMyAdminは何をするためのツールですか？",
+      "explanation": "phpMyAdminは、MySQLデータベースをブラウザのGUI（画面）で操作するためのツールです。テーブルの作成やデータの編集がマウス操作でできます。",
+      "choices": [
+        { "text": "PHPのコードを書くエディタ", "isCorrect": false },
+        { "text": "画像を編集するツール", "isCorrect": false },
+        { "text": "データベースをブラウザで操作するツール", "isCorrect": true },
+        { "text": "メールを送受信するアプリ", "isCorrect": false }
+      ]
+    }
+  ]
+}

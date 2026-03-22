@@ -25,8 +25,8 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile.prod
+      context: ..
+      dockerfile: sys/backend/Dockerfile.prod
     container_name: yy-pg-hannari-backend
     restart: unless-stopped
     expose:
@@ -38,6 +38,7 @@ services:
       - GOOGLE_CALLBACK_URL=https://yy-pg.hannari.app/auth/google/callback
       - JWT_SECRET=${JWT_SECRET}
       - FRONTEND_URL=https://yy-pg.hannari.app
+      - CONTENTS_DIR=/app/doc/contents
     depends_on:
       db:
         condition: service_healthy
@@ -46,7 +47,7 @@ services:
       - traefik-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.yy-pg-hannari-api.rule=Host(`yy-pg.hannari.app`) && (PathPrefix(`/auth/google`) || PathPrefix(`/auth/profile`) || PathPrefix(`/contents`) || PathPrefix(`/quizzes`) || PathPrefix(`/progress`))"
+      - "traefik.http.routers.yy-pg-hannari-api.rule=Host(`yy-pg.hannari.app`) && (PathPrefix(`/auth/google`) || PathPrefix(`/auth/profile`) || PathPrefix(`/contents`) || PathPrefix(`/quizzes`) || PathPrefix(`/progress`) || PathPrefix(`/media`))"
       - "traefik.http.routers.yy-pg-hannari-api.entrypoints=https"
       - "traefik.http.routers.yy-pg-hannari-api.tls=true"
       - "traefik.http.routers.yy-pg-hannari-api.tls.certresolver=cloudflare"

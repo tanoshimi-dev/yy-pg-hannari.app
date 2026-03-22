@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "FTPとは何の略ですか？",
+      "explanation": "FTPはFile Transfer Protocol（ファイル転送プロトコル）の略です。自分のPCからサーバーにファイルを送るための仕組みです。",
+      "choices": [
+        { "text": "Fast Text Program", "isCorrect": false },
+        { "text": "File Transfer Protocol", "isCorrect": true },
+        { "text": "Free Tool Package", "isCorrect": false },
+        { "text": "Form Template Page", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "FileZillaでファイルをアップロードするにはどうしますか？",
+      "explanation": "FileZillaでは、左側（自分のPC）のファイルを右側（サーバー）にドラッグ&ドロップするとアップロードできます。",
+      "choices": [
+        { "text": "メールにファイルを添付して送る", "isCorrect": false },
+        { "text": "左側から右側にドラッグ&ドロップする", "isCorrect": true },
+        { "text": "USBメモリをサーバーに差し込む", "isCorrect": false },
+        { "text": "ブラウザのアドレスバーにファイル名を入力する", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "レンタルサーバーでWebページのファイルを置くフォルダ名として一般的なものはどれですか？",
+      "explanation": "public_htmlは多くのレンタルサーバーで使われている公開フォルダ名です。このフォルダに置いたファイルがWebサイトとして公開されます。",
+      "choices": [
+        { "text": "my_documents", "isCorrect": false },
+        { "text": "public_html", "isCorrect": true },
+        { "text": "downloads", "isCorrect": false },
+        { "text": "desktop", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "FTPの接続情報として他人に見せてはいけないものはどれですか？",
+      "explanation": "FTPパスワードが漏れると、第三者にサーバーのファイルを改ざん・削除される危険があります。ホスト名やユーザー名と合わせて厳重に管理しましょう。",
+      "choices": [
+        { "text": "レンタルサーバーの会社名", "isCorrect": false },
+        { "text": "月額料金", "isCorrect": false },
+        { "text": "FTPパスワード", "isCorrect": true },
+        { "text": "公開したWebサイトのURL", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "HTMLファイルの推奨パーミッション（権限）設定はどれですか？",
+      "explanation": "644は「所有者が読み書き可能、その他のユーザーは読み取りのみ」という権限です。Webページの公開に適した設定です。",
+      "choices": [
+        { "text": "777", "isCorrect": false },
+        { "text": "644", "isCorrect": true },
+        { "text": "000", "isCorrect": false },
+        { "text": "999", "isCorrect": false }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "HTMLは何の略ですか？",
+      "explanation": "HTMLはHyperText Markup Languageの略で、Webページの構造を定義するためのマークアップ言語です。",
+      "choices": [
+        { "text": "Hyper Transfer Markup Language", "isCorrect": false },
+        { "text": "HyperText Markup Language", "isCorrect": true },
+        { "text": "High Tech Modern Language", "isCorrect": false },
+        { "text": "Home Tool Markup Language", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "JavaScriptでアラートを表示するメソッドはどれですか？",
+      "explanation": "alert()は、ブラウザにポップアップでメッセージを表示するJavaScriptのメソッドです。",
+      "choices": [
+        { "text": "message()", "isCorrect": false },
+        { "text": "popup()", "isCorrect": false },
+        { "text": "alert()", "isCorrect": true },
+        { "text": "show()", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "PHPはどこで動くプログラミング言語ですか？",
+      "explanation": "PHPはサーバーサイドのプログラミング言語です。Webサーバー上で実行され、HTMLを生成してブラウザに送信します。",
+      "choices": [
+        { "text": "ブラウザ（クライアント側）", "isCorrect": false },
+        { "text": "サーバー側", "isCorrect": true },
+        { "text": "スマートフォンの中", "isCorrect": false },
+        { "text": "メールソフトの中", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "HTMLで一番大きな見出しを作るタグはどれですか？",
+      "explanation": "<h1>タグは、HTMLで最も大きな見出し（レベル1）を表示するためのタグです。h1からh6まであり、数字が小さいほど大きな見出しになります。",
+      "choices": [
+        { "text": "<title>", "isCorrect": false },
+        { "text": "<header>", "isCorrect": false },
+        { "text": "<h1>", "isCorrect": true },
+        { "text": "<big>", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Webページを作るときの3つの技術の役割として正しいものはどれですか？",
+      "explanation": "HTMLはページの構造（骨組み）、JavaScriptはページの動き（ブラウザ側の動的処理）、PHPはサーバー側の処理を担当します。",
+      "choices": [
+        { "text": "HTML=動き、JavaScript=構造、PHP=デザイン", "isCorrect": false },
+        { "text": "HTML=構造、JavaScript=動き、PHP=サーバー処理", "isCorrect": true },
+        { "text": "HTML=サーバー処理、JavaScript=デザイン、PHP=構造", "isCorrect": false },
+        { "text": "3つとも同じ役割", "isCorrect": false }
+      ]
+    }
+  ]
+}

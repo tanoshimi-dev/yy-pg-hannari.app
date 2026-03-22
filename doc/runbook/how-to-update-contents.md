@@ -36,9 +36,9 @@ doc/contents/
 ```typescript
 const categoryNew = await prisma.category.create({
   data: {
-    name: 'カテゴリ名',
-    description: 'カテゴリの説明',
-    sortOrder: 4,  // 表示順
+    name: "カテゴリ名",
+    description: "カテゴリの説明",
+    sortOrder: 4, // 表示順
   },
 });
 ```
@@ -48,11 +48,11 @@ const categoryNew = await prisma.category.create({
 ```typescript
 const newContent = await prisma.content.create({
   data: {
-    title: 'コンテンツのタイトル',
-    description: '一覧画面に表示される説明文',
+    title: "コンテンツのタイトル",
+    description: "一覧画面に表示される説明文",
     body: `ここにコンテンツ本文（Markdown形式）を記載`,
-    categoryId: categoryXXX.id,  // 紐づけるカテゴリ
-    sortOrder: 1,                // カテゴリ内の表示順
+    categoryId: categoryXXX.id, // 紐づけるカテゴリ
+    sortOrder: 1, // カテゴリ内の表示順
   },
 });
 ```
@@ -65,17 +65,22 @@ const newContent = await prisma.content.create({
 const quiz1 = await prisma.quiz.create({
   data: {
     contentId: newContent.id,
-    question: '問題文',
-    explanation: '解説文（回答後に表示される）',
+    question: "問題文",
+    explanation: "解説文（回答後に表示される）",
     sortOrder: 1,
   },
 });
 await prisma.quizChoice.createMany({
   data: [
-    { quizId: quiz1.id, text: '選択肢1', isCorrect: false, sortOrder: 1 },
-    { quizId: quiz1.id, text: '選択肢2（正解）', isCorrect: true, sortOrder: 2 },
-    { quizId: quiz1.id, text: '選択肢3', isCorrect: false, sortOrder: 3 },
-    { quizId: quiz1.id, text: '選択肢4', isCorrect: false, sortOrder: 4 },
+    { quizId: quiz1.id, text: "選択肢1", isCorrect: false, sortOrder: 1 },
+    {
+      quizId: quiz1.id,
+      text: "選択肢2（正解）",
+      isCorrect: true,
+      sortOrder: 2,
+    },
+    { quizId: quiz1.id, text: "選択肢3", isCorrect: false, sortOrder: 3 },
+    { quizId: quiz1.id, text: "選択肢4", isCorrect: false, sortOrder: 4 },
   ],
 });
 ```
@@ -84,11 +89,11 @@ await prisma.quizChoice.createMany({
 
 seed.ts内のテンプレートリテラル（`` ` ``）の中でコードブロックを書くときは、バッククォートをエスケープする必要があります。
 
-```
+````
 正しい: \`\`\`javascript
 間違い: ```javascript        ← テンプレートリテラルが壊れる
 間違い: \\\`\\\`\\\`javascript  ← エスケープしすぎ
-```
+````
 
 ### 3. シードを実行する
 
@@ -112,7 +117,7 @@ docker compose exec backend npx prisma db seed
 本番環境でも同じ手順です。
 
 ```bash
-docker compose exec backend npx prisma db seed
+docker compose -f docker-compose.prod.yml exec backend npx prisma db seed
 ```
 
 ## チェックリスト

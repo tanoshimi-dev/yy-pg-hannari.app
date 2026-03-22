@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "HTMLの役割として正しいものはどれですか？",
+      "explanation": "HTMLはWebページの構造（骨組み）を作るための言語です。見出し・段落・画像・リンクなどの配置を定義します。",
+      "choices": [
+        { "text": "ページのデザイン（色や大きさ）を決める", "isCorrect": false },
+        { "text": "ページの構造（骨組み）を作る", "isCorrect": true },
+        { "text": "ページに動きをつける", "isCorrect": false },
+        { "text": "サーバーでデータを処理する", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "CSSで文字の色を赤にするプロパティはどれですか？",
+      "explanation": "colorプロパティは文字の色を指定します。background-colorは背景色、font-sizeは文字サイズです。",
+      "choices": [
+        { "text": "background-color: red;", "isCorrect": false },
+        { "text": "font-color: red;", "isCorrect": false },
+        { "text": "color: red;", "isCorrect": true },
+        { "text": "text-color: red;", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "JavaScriptはどこで動くプログラミング言語ですか？",
+      "explanation": "JavaScriptはブラウザ（見る人のパソコン）で動きます。ボタンのクリック処理やアニメーションなど、リアルタイムにページを操作できます。",
+      "choices": [
+        { "text": "サーバー", "isCorrect": false },
+        { "text": "ブラウザ", "isCorrect": true },
+        { "text": "データベース", "isCorrect": false },
+        { "text": "メールサーバー", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "PHPの変数の書き方として正しいものはどれですか？",
+      "explanation": "PHPの変数は必ず$（ドルマーク）をつけて書きます。JavaScriptのようにletやconstは使いません。",
+      "choices": [
+        { "text": "let name = \"太郎\";", "isCorrect": false },
+        { "text": "$name = \"太郎\";", "isCorrect": true },
+        { "text": "var name = \"太郎\";", "isCorrect": false },
+        { "text": "name := \"太郎\";", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Webページを作る4つの技術の組み合わせとして正しいものはどれですか？",
+      "explanation": "HTML（構造）、CSS（デザイン）、JavaScript（ブラウザ側の動き）、PHP（サーバー側の処理）が正しい組み合わせです。",
+      "choices": [
+        { "text": "HTML=構造、CSS=デザイン、JavaScript=動き、PHP=サーバー処理", "isCorrect": true },
+        { "text": "HTML=デザイン、CSS=構造、JavaScript=サーバー、PHP=動き", "isCorrect": false },
+        { "text": "4つとも同じ役割で、好きなものを1つ選べばよい", "isCorrect": false },
+        { "text": "HTML=動き、CSS=サーバー処理、JavaScript=構造、PHP=デザイン", "isCorrect": false }
+      ]
+    }
+  ]
+}

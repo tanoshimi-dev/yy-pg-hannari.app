@@ -17,14 +17,15 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: sys/backend/Dockerfile
     ports:
       - "3000:3000"
     env_file:
       - .env
     environment:
       DATABASE_URL: postgresql://yy-pg-hannari:hannari_password@db:5432/yy-pg-hannari_db?schema=public
+      CONTENTS_DIR: /app/doc/contents
     depends_on:
       db:
         condition: service_healthy

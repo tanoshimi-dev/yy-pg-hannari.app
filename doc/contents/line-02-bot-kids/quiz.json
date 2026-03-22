@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "LINEボットとは何ですか？",
+      "explanation": "LINEボットは、LINEアプリの中で自動的にメッセージを返してくれるプログラムです。人が手動で返信するのではなく、プログラムが自動で応答します。",
+      "choices": [
+        { "text": "LINEで自動的にメッセージを返すプログラム", "isCorrect": true },
+        { "text": "LINEのスタンプを作るツール", "isCorrect": false },
+        { "text": "LINEの友だちを自動で追加する機能", "isCorrect": false },
+        { "text": "LINEのグループを管理するアプリ", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "LINEボットを作るときに使うGoogle Apps Scriptの関数名は何ですか？",
+      "explanation": "doPost関数は、LINEからWebhookでメッセージが送られてきたときに自動的に呼び出される関数です。POSTリクエストを受け取る役割があります。",
+      "choices": [
+        { "text": "doGet", "isCorrect": false },
+        { "text": "doPost", "isCorrect": true },
+        { "text": "onMessage", "isCorrect": false },
+        { "text": "sendReply", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "LINEボットがメッセージを返信するために必要なものは何ですか？",
+      "explanation": "replyTokenは、LINEから送られてくるイベントに含まれるトークンで、このトークンを使って返信を送ります。一度使うと無効になります。",
+      "choices": [
+        { "text": "ユーザーのパスワード", "isCorrect": false },
+        { "text": "replyToken（リプライトークン）", "isCorrect": true },
+        { "text": "ユーザーの電話番号", "isCorrect": false },
+        { "text": "LINEのスタンプID", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "LINE Developersで取得する、ボットの認証に使うものは何ですか？",
+      "explanation": "アクセストークン（ACCESS_TOKEN）は、LINE Developersのチャネル設定で取得できます。APIリクエストの認証に使用します。",
+      "choices": [
+        { "text": "アクセストークン", "isCorrect": true },
+        { "text": "メールアドレス", "isCorrect": false },
+        { "text": "クレジットカード番号", "isCorrect": false },
+        { "text": "IPアドレス", "isCorrect": false }
+      ]
+    }
+  ]
+}

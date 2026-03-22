@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "GAS（Google Apps Script）はどの言語をベースにしていますか？",
+      "explanation": "GASはJavaScriptをベースにしたプログラミング言語です。JavaScriptの文法がそのまま使えます。",
+      "choices": [
+        { "text": "Python", "isCorrect": false },
+        { "text": "JavaScript", "isCorrect": true },
+        { "text": "Ruby", "isCorrect": false },
+        { "text": "PHP", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "GASでログを出力するために使うメソッドはどれですか？",
+      "explanation": "Logger.log()は、GASで実行結果やデバッグ情報をログに出力するためのメソッドです。",
+      "choices": [
+        { "text": "console.log()", "isCorrect": false },
+        { "text": "print()", "isCorrect": false },
+        { "text": "Logger.log()", "isCorrect": true },
+        { "text": "echo()", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "変数を作るときに使うキーワードで、あとから中身を変えられるのはどれですか？",
+      "explanation": "letで作った変数はあとから値を変更できます。constで作った変数（定数）は変更できません。",
+      "choices": [
+        { "text": "const", "isCorrect": false },
+        { "text": "let", "isCorrect": true },
+        { "text": "fixed", "isCorrect": false },
+        { "text": "static", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "スプレッドシートのA1セルに値を書き込むコードとして正しいものはどれですか？",
+      "explanation": "getRange('A1').setValue('値') で、指定したセルに値を書き込むことができます。",
+      "choices": [
+        { "text": "sheet.write('A1', '値')", "isCorrect": false },
+        { "text": "sheet.getRange('A1').setValue('値')", "isCorrect": true },
+        { "text": "sheet.cell('A1').set('値')", "isCorrect": false },
+        { "text": "sheet.put('A1', '値')", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "for文の「for (let i = 1; i <= 5; i++)」で、ループは何回実行されますか？",
+      "explanation": "iが1から始まり、5以下の間ループするので、i=1,2,3,4,5の合計5回実行されます。",
+      "choices": [
+        { "text": "4回", "isCorrect": false },
+        { "text": "5回", "isCorrect": true },
+        { "text": "6回", "isCorrect": false },
+        { "text": "1回", "isCorrect": false }
+      ]
+    }
+  ]
+}

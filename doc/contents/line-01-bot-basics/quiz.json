@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "LINEボットを作るために必要なチャネルの種類はどれですか？",
+      "explanation": "LINEボットを作るには「Messaging API」チャネルを選びます。「LINEログイン」は別の用途（WebサイトにLINEログイン機能をつけるとき）に使います。",
+      "choices": [
+        { "text": "LINEログイン", "isCorrect": false },
+        { "text": "Messaging API", "isCorrect": true },
+        { "text": "LINE MINI App", "isCorrect": false },
+        { "text": "LINE Pay", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "チャネルアクセストークンは何のために使いますか？",
+      "explanation": "チャネルアクセストークンは、ボットからLINEにメッセージを送信するときの認証に使います。APIリクエストのAuthorizationヘッダーに含めます。",
+      "choices": [
+        { "text": "ボットの名前を変更するため", "isCorrect": false },
+        { "text": "ボットからLINEにメッセージを送るため", "isCorrect": true },
+        { "text": "ボットのアイコンを設定するため", "isCorrect": false },
+        { "text": "LINEアカウントを作成するため", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Webhookとは何ですか？",
+      "explanation": "Webhookは、ユーザーがボットにメッセージを送ったときに、LINEがあなたのプログラムに通知を送る仕組みです。この通知を受け取って処理を行います。",
+      "choices": [
+        { "text": "ボットのデザインを変える機能", "isCorrect": false },
+        { "text": "ボットを友だちに追加する方法", "isCorrect": false },
+        { "text": "メッセージが届いたことをプログラムに知らせる仕組み", "isCorrect": true },
+        { "text": "ボットの料金プランのこと", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "チャネルシークレットやアクセストークンの取り扱いとして正しいものはどれですか？",
+      "explanation": "チャネルシークレットとアクセストークンは、ボットを操作するための重要な情報です。漏れると第三者にボットを悪用される可能性があるため、絶対に公開してはいけません。",
+      "choices": [
+        { "text": "SNSで共有して友だちにも使ってもらう", "isCorrect": false },
+        { "text": "GitHubの公開リポジトリにアップする", "isCorrect": false },
+        { "text": "絶対に他人に見せず、安全に管理する", "isCorrect": true },
+        { "text": "ボットの説明文に記載しておく", "isCorrect": false }
+      ]
+    }
+  ]
+}

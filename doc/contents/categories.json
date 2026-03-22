@@ -1,0 +1,20 @@
+[
+  {
+    "tag": "gas",
+    "name": "Google Apps Script",
+    "description": "Google Apps Scriptを使ったスプレッドシートのデータ分析を学びます",
+    "sortOrder": 1
+  },
+  {
+    "tag": "web",
+    "name": "Webプログラミング",
+    "description": "HTML・JavaScript・PHPを使ったWebアプリケーション開発を学びます",
+    "sortOrder": 2
+  },
+  {
+    "tag": "line",
+    "name": "LINEボット開発",
+    "description": "LINEボットとGoogle Apps Scriptを使ったチャットボット開発を学びます",
+    "sortOrder": 3
+  }
+]
