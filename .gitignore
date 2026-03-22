@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+
+# Build
+dist
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Docker
+postgres_data
+
+# Prisma
+*.db
+*.db-journal
+
+.claude
+.CLAUDE.md
