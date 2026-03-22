@@ -10,13 +10,13 @@ function loginWithGoogle() {
   <div class="login-page">
     <div class="login-container">
       <div class="login-logo">
-        <div class="logo-icon">H</div>
-        <h1 class="logo-text">Hannari</h1>
-        <p class="logo-tagline">楽しく学ぼう！</p>
+        <img class="logo-icon" src="/yy-pg-logo-mono.png" alt="yy-pg-logo" />
+        <h1 class="logo-text">わいわい！プログラミング</h1>
+        <!-- <p class="logo-tagline">楽しく学ぼう！</p> -->
       </div>
 
       <div class="login-card">
-        <h2>ログイン</h2>
+        <!-- <h2 class="hidden">ログイン</h2> -->
         <p class="login-description">
           Googleアカウントでログインして、学習を始めましょう！
         </p>
@@ -46,9 +46,9 @@ function loginWithGoogle() {
 
       <div class="login-footer">
         <div class="decorative-stars">
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
+          <img class="star" src="/star.png" alt="star" />
+          <img class="star" src="/star.png" alt="star" />
+          <img class="star" src="/star.png" alt="star" />
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@ function loginWithGoogle() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #ede9fe 50%, #f5f7fa 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f6ff 50%, #ffffff 100%);
   padding: 1rem;
 }
 
@@ -79,15 +79,9 @@ function loginWithGoogle() {
   width: 80px;
   height: 80px;
   border-radius: 20px;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: #fff;
-  font-size: 2.5rem;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: contain;
   margin: 0 auto 1rem;
-  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+  display: block;
 }
 
 .logo-text {
@@ -162,8 +156,9 @@ function loginWithGoogle() {
 }
 
 .star {
-  color: #fbbf24;
-  font-size: 1.25rem;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
   animation: twinkle 2s ease-in-out infinite;
 }
 

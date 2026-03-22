@@ -20,8 +20,8 @@ function navigate(path: string) {
     <div class="header-inner">
       <div class="header-left">
         <div class="logo" @click="navigate('/')">
-          <span class="logo-mark">H</span>
-          <span class="logo-name">Hannari</span>
+          <img class="logo-mark" src="/yy-pg-logo.png" alt="yy-pg-logo" />
+          <span class="logo-name">わいわい！プログラミング</span>
         </div>
 
         <nav v-if="authStore.isAuthenticated" class="nav-links">
@@ -98,13 +98,7 @@ function navigate(path: string) {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: contain;
 }
 
 .logo-name {
