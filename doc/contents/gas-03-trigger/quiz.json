@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "Google Apps Script（GAS）は何の言語をベースにしていますか？",
+      "explanation": "Google Apps ScriptはJavaScriptをベースにしたプログラミング言語です。JavaScriptの文法がそのまま使えます。",
+      "choices": [
+        { "text": "Python", "isCorrect": false },
+        { "text": "JavaScript", "isCorrect": true },
+        { "text": "Ruby", "isCorrect": false },
+        { "text": "Java", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "スプレッドシートのデータを取得するメソッドはどれですか？",
+      "explanation": "getValues()メソッドは、指定した範囲のセルの値を2次元配列として取得します。getDataRange().getValues()のように組み合わせて使います。",
+      "choices": [
+        { "text": "getData()", "isCorrect": false },
+        { "text": "fetchData()", "isCorrect": false },
+        { "text": "getValues()", "isCorrect": true },
+        { "text": "readCells()", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "GASのトリガー機能でできることは何ですか？",
+      "explanation": "トリガー機能を使うと、決まった時間や条件でプログラムを自動実行できます。毎日・毎週など定期実行の設定が可能です。",
+      "choices": [
+        { "text": "スプレッドシートの色を変える", "isCorrect": false },
+        { "text": "決まった時間にプログラムを自動実行する", "isCorrect": true },
+        { "text": "Googleアカウントを作成する", "isCorrect": false },
+        { "text": "パソコンの電源を切る", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "GASでログを出力するために使うメソッドはどれですか？",
+      "explanation": "Logger.log()は、GASでデバッグ情報やメッセージをログに出力するためのメソッドです。実行ログで確認できます。",
+      "choices": [
+        { "text": "console.log()", "isCorrect": false },
+        { "text": "print()", "isCorrect": false },
+        { "text": "Logger.log()", "isCorrect": true },
+        { "text": "System.out()", "isCorrect": false }
+      ]
+    }
+  ]
+}

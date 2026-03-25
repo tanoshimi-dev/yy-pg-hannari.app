@@ -10,15 +10,15 @@ function loginWithGoogle() {
   <div class="login-page">
     <div class="login-container">
       <div class="login-logo">
-        <img class="logo-icon" src="/yy-pg-logo-mono.png" alt="yy-pg-logo" />
-        <h1 class="logo-text">わいわい！プログラミング</h1>
+        <img class="logo-icon" src="/yy-pg-logo.png" alt="yy-pg-logo" />
+        <!-- <h1 class="logo-text">わいわい！プログラミング</h1> -->
         <!-- <p class="logo-tagline">楽しく学ぼう！</p> -->
       </div>
 
       <div class="login-card">
         <!-- <h2 class="hidden">ログイン</h2> -->
         <p class="login-description">
-          Googleアカウントでログインして、学習を始めましょう！
+          ログインして、学習を始めましょう！
         </p>
 
         <button class="google-btn" @click="loginWithGoogle">
@@ -77,11 +77,17 @@ function loginWithGoogle() {
 
 .logo-icon {
   width: 80px;
-  height: 80px;
+  height: auto;
   border-radius: 20px;
   object-fit: contain;
   margin: 0 auto 1rem;
   display: block;
+}
+
+@media (min-width: 768px) {
+  .logo-icon {
+    width: 100%;
+  }
 }
 
 .logo-text {
