@@ -1,30 +1,24 @@
 import { Module } from '@nestjs/common';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { ContentsModule } from './contents/contents.module';
 import { QuizzesModule } from './quizzes/quizzes.module';
 import { ProgressModule } from './progress/progress.module';
-
-const contentsDir =
-  process.env.CONTENTS_DIR || join(__dirname, '..', '..', '..', 'doc', 'contents');
+import { MediaModule } from './media/media.module';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: contentsDir,
-      serveRoot: '/media',
-      serveStaticOptions: {
-        index: false,
-        fallthrough: false,
-      },
-    }),
+    // Per-IP rate limit: 300 requests / minute
+    ThrottlerModule.forRoot([{ ttl: 60_000, limit: 300 }]),
+    MediaModule,
     PrismaModule,
     AuthModule,
     ContentsModule,
     QuizzesModule,
     ProgressModule,
   ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

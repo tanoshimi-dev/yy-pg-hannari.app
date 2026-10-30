@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:24.22.2-alpine AS builder
 
 WORKDIR /app
 
@@ -11,20 +11,28 @@ RUN npx prisma generate
 COPY sys/backend/ .
 RUN npm run build
 
-FROM node:20-alpine
+FROM node:24.22.2-alpine
 
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/tsconfig.json ./tsconfig.json
-RUN npm ci --omit=dev && npm install -g ts-node typescript
+# prisma CLI is a production dependency (pinned by package-lock) so that
+# `prisma migrate deploy` / `prisma db seed` never download it at runtime.
+# Seed runs the compiled JS (see prisma7.config.ts), so ts-node is not needed.
+RUN npm ci --omit=dev && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma7.config.ts ./prisma7.config.ts
+# Generated Prisma Client
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY doc/contents ./doc/contents
 
+USER node
+
 EXPOSE 3000
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/src/main.js"]
+CMD ["sh", "-c", "npx --no-install prisma migrate deploy && node dist/src/main.js"]

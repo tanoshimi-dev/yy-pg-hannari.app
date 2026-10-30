@@ -39,6 +39,8 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - FRONTEND_URL=https://yy-pg.hannari.app
       - CONTENTS_DIR=/app/doc/contents
+      # Traefik の 1 ホップ分を信頼し、レート制限で実クライアント IP を使う
+      - TRUST_PROXY_HOPS=1
     depends_on:
       db:
         condition: service_healthy

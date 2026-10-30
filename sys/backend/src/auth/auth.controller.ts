@@ -21,7 +21,11 @@ export class AuthController {
     const user = req.user as User;
     const { accessToken } = this.authService.login(user);
     const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-    res.redirect(`${frontendUrl}/auth/callback?token=${accessToken}`);
+    // Pass the token in the URL fragment so it is never sent to servers
+    // (not logged in access logs, not leaked via Referer)
+    res.redirect(
+      `${frontendUrl}/auth/callback#token=${encodeURIComponent(accessToken)}`,
+    );
   }
 
   @Get('profile')

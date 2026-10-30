@@ -1,82 +1,44 @@
-import { test, expect } from '@playwright/test';
-import { mockLogin } from './helpers/auth';
+import { test, expect } from './helpers/auth';
 
 test.describe('Contents Page', () => {
-  test.beforeEach(async ({ page }) => {
-    await mockLogin(page);
-  });
-
-  test('should display a list of contents', async ({ page }) => {
+  test('should display a list of contents', async ({ page, user: _user }) => {
     await page.goto('/contents');
 
-    // Wait for the contents list to load
-    const contentsList = page.locator('[data-testid="contents-list"]').or(
-      page.locator('.contents-list')
-    ).or(
-      page.getByRole('list')
-    );
-
-    await expect(contentsList).toBeVisible({ timeout: 10000 });
-
-    // Verify at least one content item exists
-    const contentItems = page.locator('[data-testid="content-card"]').or(
-      page.locator('.content-card')
-    ).or(
-      page.getByRole('listitem')
-    );
-
-    const count = await contentItems.count();
-    expect(count).toBeGreaterThan(0);
+    await expect(page.getByRole('heading', { name: 'コンテンツ一覧' })).toBeVisible();
+    await expect(page.locator('.category-section').first()).toBeVisible({ timeout: 10000 });
+    expect(await page.locator('.content-card').count()).toBeGreaterThan(0);
   });
 
-  test('should display title and description on content cards', async ({ page }) => {
+  test('should display title and description on content cards', async ({ page, user: _user }) => {
     await page.goto('/contents');
 
-    // Wait for content cards to load
-    const firstCard = page.locator('[data-testid="content-card"]').or(
-      page.locator('.content-card')
-    ).or(
-      page.getByRole('listitem')
-    ).first();
-
+    const firstCard = page.locator('.content-card').first();
     await expect(firstCard).toBeVisible({ timeout: 10000 });
-
-    // Check that the card has a title element
-    const title = firstCard.locator('[data-testid="content-title"]').or(
-      firstCard.locator('.content-title')
-    ).or(
-      firstCard.locator('h2, h3, h4')
-    );
-    await expect(title).toBeVisible();
-    await expect(title).not.toBeEmpty();
-
-    // Check that the card has a description element
-    const description = firstCard.locator('[data-testid="content-description"]').or(
-      firstCard.locator('.content-description')
-    ).or(
-      firstCard.locator('p')
-    );
-    await expect(description).toBeVisible();
-    await expect(description).not.toBeEmpty();
+    await expect(firstCard.locator('.card-title')).not.toBeEmpty();
+    await expect(firstCard.locator('.card-description')).not.toBeEmpty();
+    // A new user has not started anything yet
+    await expect(firstCard.locator('.status-badge')).toHaveText('NEW');
   });
 
-  test('should navigate to content detail page when clicking a card', async ({ page }) => {
+  test('should navigate to content detail page when clicking a card', async ({ page, user: _user }) => {
     await page.goto('/contents');
 
-    // Wait for and click the first content card
-    const firstCard = page.locator('[data-testid="content-card"]').or(
-      page.locator('.content-card')
-    ).or(
-      page.getByRole('listitem')
-    ).first();
+    const firstCard = page.locator('.content-card').first();
+    const title = await firstCard.locator('.card-title').textContent();
+    await firstCard.click();
 
-    await expect(firstCard).toBeVisible({ timeout: 10000 });
+    await expect(page).toHaveURL(/\/contents\/[0-9a-f-]{36}$/);
+    await expect(page.getByRole('heading', { name: title!.trim() }).first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'クイズをはじめる' })).toBeVisible();
+  });
 
-    // Get the content link or clickable element
-    const clickable = firstCard.locator('a').first().or(firstCard);
-    await clickable.click();
+  test('should render lesson images from the media endpoint', async ({ page, user: _user }) => {
+    await page.goto('/contents');
+    await page.locator('.content-card', { hasText: 'GAS' }).first().click();
 
-    // Verify navigation to a detail page (URL should contain content ID)
-    await expect(page).toHaveURL(/.*contents\/\d+|.*content\/\d+/, { timeout: 5000 });
+    const image = page.locator('.image-wrapper img').first();
+    await expect(image).toBeVisible({ timeout: 10000 });
+    await expect(image).toHaveAttribute('src', /\/media\/[^/]+\/assets\//);
+    expect(await image.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   });
 });

@@ -1,0 +1,45 @@
+name: Security audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Every Monday 09:00 JST
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [backend, frontend, e2e]
+    defaults:
+      run:
+        working-directory: sys/${{ matrix.package }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: sys/${{ matrix.package }}/package-lock.json
+
+      - name: npm audit (high and above)
+        run: npm audit --audit-level=high
+
+      - name: Install
+        if: matrix.package != 'e2e'
+        run: npm ci
+
+      - name: Build
+        if: matrix.package != 'e2e'
+        run: |
+          if [ "${{ matrix.package }}" = "backend" ]; then npx prisma generate; fi
+          npm run build

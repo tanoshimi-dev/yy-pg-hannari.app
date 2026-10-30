@@ -2,6 +2,7 @@
 import { onMounted, ref, computed, nextTick, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Marked, Renderer } from 'marked';
+import DOMPurify from 'dompurify';
 import { useLearningStore } from '../stores/learning';
 import AppLayout from '../components/AppLayout.vue';
 
@@ -93,13 +94,23 @@ function resolveMediaUrl(src: string): string {
   return `${apiBase}${src}`;
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function renderBody(body: string): string {
   let headingIndex = 0;
 
   // Pre-process: convert @[alt](src) video syntax before marked parses it
   const preprocessed = body.replace(/@\[([^\]]*)\]\(([^)]+)\)/g, (_m, alt, src) => {
-    const url = resolveMediaUrl(src);
-    return `<div class="video-wrapper"><video controls preload="metadata" title="${alt}"><source src="${url}">お使いのブラウザは動画再生に対応していません。</video>${alt ? `<p class="media-caption">${alt}</p>` : ''}</div>`;
+    const url = escapeHtml(resolveMediaUrl(src));
+    const safeAlt = escapeHtml(alt);
+    return `<div class="video-wrapper"><video controls preload="metadata" title="${safeAlt}"><source src="${url}">お使いのブラウザは動画再生に対応していません。</video>${safeAlt ? `<p class="media-caption">${safeAlt}</p>` : ''}</div>`;
   });
 
   // Configure marked with custom renderer
@@ -112,15 +123,18 @@ function renderBody(body: string): string {
   };
 
   renderer.image = function ({ href, title, text }) {
-    const url = resolveMediaUrl(href);
-    const alt = text || '';
-    const titleAttr = title ? ` title="${title}"` : '';
+    const url = escapeHtml(resolveMediaUrl(href));
+    const alt = escapeHtml(text || '');
+    const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
     return `<figure class="image-wrapper"><img src="${url}" alt="${alt}"${titleAttr} loading="lazy">${alt ? `<figcaption class="media-caption">${alt}</figcaption>` : ''}</figure>`;
   };
 
   const marked = new Marked({ renderer });
 
-  const html = marked.parse(preprocessed) as string;
+  // Sanitize before v-html: content may be added by admins in the future
+  const html = DOMPurify.sanitize(marked.parse(preprocessed) as string, {
+    ADD_ATTR: ['controls', 'preload', 'loading'],
+  });
 
   // Wrap tables in scrollable container for mobile
   return html.replace(/<table>/g, '<div class="table-scroll"><table>').replace(/<\/table>/g, '</table></div>');

@@ -1,3 +1,7 @@
+# Fixed project name: the default ("sys", from the directory name) collides
+# with other projects and makes them share the postgres_data volume.
+name: yy-pg-hannari
+
 services:
   db:
     image: postgres:16-alpine
@@ -6,7 +10,7 @@ services:
       POSTGRES_PASSWORD: hannari_password
       POSTGRES_DB: yy-pg-hannari_db
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

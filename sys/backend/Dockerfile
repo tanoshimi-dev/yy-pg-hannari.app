@@ -1,15 +1,17 @@
-FROM node:20-alpine
+FROM node:24.22.2-alpine
 
 WORKDIR /app
+RUN chown node:node /app
+USER node
 
-COPY sys/backend/package*.json ./
+COPY --chown=node:node sys/backend/package*.json ./
 RUN npm ci
 
-COPY sys/backend/prisma ./prisma
+COPY --chown=node:node sys/backend/prisma ./prisma
 RUN npx prisma generate
 
-COPY sys/backend/ .
-COPY doc/contents ./doc/contents
+COPY --chown=node:node sys/backend/ .
+COPY --chown=node:node doc/contents ./doc/contents
 
 EXPOSE 3000
 

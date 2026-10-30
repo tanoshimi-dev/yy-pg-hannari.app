@@ -46,15 +46,13 @@ const router = createRouter({
 router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore();
 
-  // Handle OAuth callback token
-  const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get('token');
+  // Handle OAuth callback token (passed in the URL fragment, never sent to servers)
+  const hashParams = new URLSearchParams(window.location.hash.slice(1));
+  const token = hashParams.get('token');
   if (token) {
     authStore.setToken(token);
     // Remove token from URL
-    const url = new URL(window.location.href);
-    url.searchParams.delete('token');
-    window.history.replaceState({}, '', url.pathname);
+    window.history.replaceState({}, '', window.location.pathname);
     next({ name: 'dashboard' });
     return;
   }

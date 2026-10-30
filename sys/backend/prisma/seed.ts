@@ -1,8 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 import * as path from 'path';
 import { loadCategories, loadAllContents } from './content-parser';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+});
 
 const CONTENTS_DIR =
   process.env.CONTENTS_DIR || path.resolve(__dirname, '../../../doc/contents');

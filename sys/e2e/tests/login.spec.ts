@@ -22,24 +22,28 @@ test.describe('Login Page', () => {
   test('should redirect to Google OAuth when clicking login', async ({ page }) => {
     await page.goto('/login');
 
-    const googleButton = page.getByRole('button', { name: /google/i }).or(
-      page.getByRole('link', { name: /google/i })
-    );
+    // Do not actually leave for Google: stop at the backend auth endpoint
+    await page.route('**/auth/google', (route) => route.abort());
 
-    // Listen for navigation to Google OAuth
-    const [response] = await Promise.all([
-      page.waitForEvent('popup').catch(() => null),
-      page.waitForURL(/accounts\.google\.com|localhost:3000\/auth\/google/, { timeout: 5000 }).catch(() => null),
-      googleButton.click(),
+    const [request] = await Promise.all([
+      page.waitForRequest((req) => new URL(req.url()).pathname === '/auth/google'),
+      page.getByRole('button', { name: /google/i }).click(),
     ]);
+    expect(new URL(request.url()).port).toBe('3000');
+  });
 
-    // Verify the URL changed to Google OAuth or the backend auth endpoint
-    const currentUrl = page.url();
-    const isRedirected =
-      currentUrl.includes('accounts.google.com') ||
-      currentUrl.includes('/auth/google') ||
-      (response && response.url().includes('accounts.google.com'));
+  test('backend should redirect to Google OAuth with the callback URL', async ({ request }) => {
+    const res = await request.get('http://localhost:3000/auth/google', { maxRedirects: 0 });
+    expect(res.status()).toBe(302);
 
-    expect(isRedirected).toBeTruthy();
+    const location = new URL(res.headers()['location']);
+    expect(location.host).toBe('accounts.google.com');
+    expect(location.searchParams.get('response_type')).toBe('code');
+    expect(location.searchParams.get('redirect_uri')).toMatch(/\/auth\/google\/callback$/);
+  });
+
+  test('should redirect unauthenticated users to login', async ({ page }) => {
+    await page.goto('/contents');
+    await expect(page).toHaveURL(/\/login$/);
   });
 });
